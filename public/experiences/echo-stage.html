@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Echo Stage</title>
+    <style>
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        background: linear-gradient(180deg, #120f1b, #1f1b2d);
+        color: white;
+        font-family: Helvetica, Arial, sans-serif;
+      }
+
+      .stage {
+        width: min(85vw, 760px);
+        display: grid;
+        gap: 18px;
+      }
+
+      .bar {
+        height: 78px;
+        border-radius: 22px;
+        background: linear-gradient(90deg, #fb7185, #f59e0b);
+        opacity: 0.9;
+      }
+
+      .bar:nth-child(2) {
+        width: 78%;
+      }
+
+      .bar:nth-child(3) {
+        width: 58%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="stage">
+      <p>Echo Stage</p>
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Signal Grid</title>
+    <style>
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        background: #101418;
+        font-family: Helvetica, Arial, sans-serif;
+        color: #f8fafc;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(6, 56px);
+        gap: 14px;
+      }
+
+      .grid span {
+        width: 56px;
+        height: 56px;
+        border-radius: 16px;
+        background: linear-gradient(180deg, #94a3b8, #334155);
+      }
+
+      .grid span:nth-child(3n) {
+        height: 82px;
+        background: linear-gradient(180deg, #f59e0b, #7c2d12);
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <p>Signal Grid</p>
+      <div class="grid">
+        <span></span><span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span><span></span>
+      </div>
+    </div>
+  </body>
+</html>
