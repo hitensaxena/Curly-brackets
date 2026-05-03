@@ -39,6 +39,7 @@ function SettingsInner() {
   const { cliHealth, setCliHealth } = useAppStore()
   const [checking, setChecking] = useState(false)
   const [settings, setSettings] = useState<Record<string, string>>({})
+  const [appInfo, setAppInfo] = useState<{ name: string; version: string; electron: string; node: string; chrome: string; platform: string; arch: string } | null>(null)
 
   const checkHealth = async () => {
     setChecking(true)
@@ -49,6 +50,7 @@ function SettingsInner() {
 
   useEffect(() => { checkHealth() }, [])
   useEffect(() => { window.api.settings.all().then(setSettings) }, [])
+  useEffect(() => { window.api.app?.info().then(setAppInfo).catch(() => { /* old preload */ }) }, [])
 
   const update = async (key: string, value: string) => {
     await window.api.settings.set(key, value)
@@ -149,11 +151,12 @@ function SettingsInner() {
         {/* App Info */}
         <Section title="About">
           <div className="space-y-2">
-            <InfoRow label="App" value="Curly Brackets" />
-            <InfoRow label="Version" value="0.1.0 (Phase 1)" />
-            <InfoRow label="Node.js" value={window.electron?.process?.versions?.node || 'N/A'} />
-            <InfoRow label="Electron" value={window.electron?.process?.versions?.electron || 'N/A'} />
-            <InfoRow label="Chrome" value={window.electron?.process?.versions?.chrome || 'N/A'} />
+            <InfoRow label="App" value={appInfo?.name ?? 'Curly Brackets'} />
+            <InfoRow label="Version" value={appInfo?.version ?? '—'} />
+            <InfoRow label="Platform" value={appInfo ? `${appInfo.platform} ${appInfo.arch}` : '—'} />
+            <InfoRow label="Node.js" value={appInfo?.node ?? '—'} />
+            <InfoRow label="Electron" value={appInfo?.electron ?? '—'} />
+            <InfoRow label="Chrome" value={appInfo?.chrome ?? '—'} />
           </div>
         </Section>
       </div>

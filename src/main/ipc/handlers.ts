@@ -1,4 +1,4 @@
-import { ipcMain, dialog, BrowserWindow } from 'electron'
+import { ipcMain, dialog, BrowserWindow, app } from 'electron'
 import { randomUUID } from 'crypto'
 import { db } from '../db'
 import { projects, usageRecords, workflows, workflowRuns, agentMessages, appSettings } from '../db/schema'
@@ -367,6 +367,17 @@ export function registerHandlers(): void {
     if (result.canceled || result.filePaths.length === 0) return null
     return result.filePaths[0]
   })
+
+  // ── App info ───────────────────────────────────────────────────────────────
+  ipcMain.handle('app:info', async () => ({
+    name: 'Curly Brackets',
+    version: app.getVersion(),
+    electron: process.versions.electron,
+    node: process.versions.node,
+    chrome: process.versions.chrome,
+    platform: process.platform,
+    arch: process.arch
+  }))
 
   // ── CLI Health ─────────────────────────────────────────────────────────────
   ipcMain.handle('cli:health', async (): Promise<CLIHealth> => {

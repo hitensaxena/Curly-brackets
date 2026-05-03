@@ -59,6 +59,9 @@ const api = {
   cli: {
     health: () => ipcRenderer.invoke('cli:health')
   },
+  app: {
+    info: () => ipcRenderer.invoke('app:info')
+  },
   updater: {
     check: () => ipcRenderer.invoke('updater:check'),
     install: () => ipcRenderer.invoke('updater:install'),

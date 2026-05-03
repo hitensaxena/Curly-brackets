@@ -82,6 +82,17 @@ declare global {
         markRead: (id: string) => Promise<void>
       }
       cli: { health: () => Promise<CLIHealth> }
+      app: {
+        info: () => Promise<{
+          name: string
+          version: string
+          electron: string
+          node: string
+          chrome: string
+          platform: string
+          arch: string
+        }>
+      }
       updater: {
         check: () => Promise<unknown>
         install: () => Promise<void>

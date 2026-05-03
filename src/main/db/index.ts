@@ -15,15 +15,24 @@ const sqlite = new Database(DB_PATH)
 sqlite.pragma('journal_mode = WAL')
 sqlite.pragma('foreign_keys = ON')
 
-// Load sqlite-vec extension for vector search (KNN, cosine distance, etc.)
+// Load sqlite-vec extension for vector search (KNN, cosine distance, etc.).
+//
+// In a packaged Electron app the platform-specific dylib lives inside an asar
+// archive, but `dlopen` (the syscall behind `db.loadExtension`) cannot read
+// from asar. electron-builder's `asarUnpack` mirrors the file to
+// `app.asar.unpacked/`, but `require.resolve(...)` still returns the asar path.
+// So we ask sqlite-vec for the path, then rewrite `app.asar/` → `app.asar.unpacked/`.
 let vecLoaded = false
 try {
-  sqliteVec.load(sqlite)
+  let extPath: string = sqliteVec.getLoadablePath()
+  if (extPath.includes(`${'/'}app.asar${'/'}`)) {
+    extPath = extPath.replace(`${'/'}app.asar${'/'}`, `${'/'}app.asar.unpacked${'/'}`)
+  }
+  sqlite.loadExtension(extPath)
   vecLoaded = true
-  console.log('[db] sqlite-vec loaded ok')
+  console.log('[db] sqlite-vec loaded ok from', extPath)
 } catch (err) {
   console.error('[db] FAILED to load sqlite-vec — knowledge indexing will not work:', err)
-  console.error('[db] If running a packaged build, the platform-specific dylib (sqlite-vec-darwin-arm64/vec0.dylib) was probably bundled inside the asar. Add it to asarUnpack.')
 }
 export const isVecExtensionLoaded = (): boolean => vecLoaded
 
