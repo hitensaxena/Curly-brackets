@@ -84,7 +84,7 @@ export function initAutoUpdater(): void {
     setImmediate(() => autoUpdater.quitAndInstall(false, true))
   })
   ipcMain.handle('updater:openReleases', () => {
-    shell.openExternal('https://github.com/hitensaxena/curly-brackets/releases')
+    shell.openExternal('https://github.com/hitensaxena/Curly-brackets/releases')
   })
   ipcMain.handle('updater:status', async () => ({
     phase: 'idle',
@@ -100,7 +100,7 @@ function registerNoOpHandlers(): void {
   ipcMain.handle('updater:check', () => ({ skipped: 'dev mode' }))
   ipcMain.handle('updater:install', () => { /* no-op */ })
   ipcMain.handle('updater:openReleases', () => {
-    shell.openExternal('https://github.com/hitensaxena/curly-brackets/releases')
+    shell.openExternal('https://github.com/hitensaxena/Curly-brackets/releases')
   })
   ipcMain.handle('updater:status', async () => ({ phase: 'idle', currentVersion: app.getVersion(), dev: true }))
 }

@@ -92,4 +92,5 @@ npmRebuild: true
 publish:
   provider: github
   owner: hitensaxena
-  repo: curly-brackets
+  repo: Curly-brackets
+  releaseType: release
