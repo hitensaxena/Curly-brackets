@@ -1,6 +1,6 @@
 {
   "name": "curly-brackets",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Curly Brackets — your local-first, multi-agent AI workstation. Chat, workflows, agents, and a knowledge graph in one Electron app.",
   "main": "./out/main/index.js",
   "author": "Hiten Saxena <hiten@mintrix.ai>",

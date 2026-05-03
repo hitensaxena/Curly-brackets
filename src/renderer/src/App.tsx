@@ -5,6 +5,7 @@ import { ToastHost, pushToast } from './components/ToastHost'
 import { CommandPalette } from './components/CommandPalette'
 import { Onboarding } from './components/Onboarding'
 import { UpdateBanner } from './components/UpdateBanner'
+import { AuroraBackground } from './components/AuroraBackground'
 import { Home } from './pages/Home'
 import { Chat } from './pages/Chat'
 import { Agents } from './pages/Agents'
@@ -184,18 +185,24 @@ export default function App() {
   }
 
   return (
-    <div className="flex flex-col h-screen bg-[#0a0a0f] overflow-hidden">
-      <StatusBar />
-      <div className="flex flex-1 min-h-0">
-        <Sidebar />
-        <main className="flex-1 flex min-w-0 min-h-0 overflow-hidden">
-          {pages[currentPage] ?? <Chat />}
-        </main>
+    <>
+      {/* Ambient backdrop — sits behind everything else (z-index 0) */}
+      <AuroraBackground />
+
+      {/* App chrome rides above the aurora at z-index 1 */}
+      <div className="relative flex flex-col h-screen overflow-hidden" style={{ zIndex: 1 }}>
+        <StatusBar />
+        <div className="flex flex-1 min-h-0">
+          <Sidebar />
+          <main className="flex-1 flex min-w-0 min-h-0 overflow-hidden">
+            {pages[currentPage] ?? <Chat />}
+          </main>
+        </div>
+        <ToastHost />
+        <CommandPalette />
+        <Onboarding />
+        <UpdateBanner />
       </div>
-      <ToastHost />
-      <CommandPalette />
-      <Onboarding />
-      <UpdateBanner />
-    </div>
+    </>
   )
 }

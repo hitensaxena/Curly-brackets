@@ -1,0 +1,199 @@
+/* ─────────────────────────────────────────────────────────────────────────
+ * Curly Brackets — design system tokens (Phase 1 of UI Design Revamp)
+ *
+ * Three layers:
+ *   1. CSS custom properties on :root  → for use in raw CSS / inline styles
+ *   2. Tailwind v4 @theme block        → exposes them as utilities (bg-glass-1, etc.)
+ *   3. Reusable component classes      → .glass-1 / .glass-2 / .glass-3 / .aurora
+ *
+ * All tokens are documented in: Workstation/06-Roadmap/UI Design Revamp.md §3
+ * ───────────────────────────────────────────────────────────────────────── */
+
+:root {
+  /* ── Brand & accents ─────────────────────────────────────────────────── */
+  --cb-brand-primary:   #14b8a6;  /* teal-500 */
+  --cb-brand-secondary: #5eead4;  /* teal-300 */
+  --cb-brand-deep:      #0d4f5c;
+  --cb-accent-violet:   #8b6dff;
+  --cb-accent-amber:    #f59e0b;
+  --cb-accent-rose:     #fb7185;
+
+  /* ── Aurora backdrop stops ───────────────────────────────────────────── */
+  --cb-aurora-1: #0c2030;
+  --cb-aurora-2: #0a3a4a;
+  --cb-aurora-3: #103848;
+  --cb-aurora-4: #14525a;
+  --cb-aurora-5: #1a2440;
+  --cb-aurora-base: #06222b;  /* solid color the aurora fades to / matches BrowserWindow bg */
+
+  /* ── Glass tiers ─────────────────────────────────────────────────────── */
+  --cb-glass-1-bg:     rgba(255, 255, 255, 0.04);
+  --cb-glass-1-border: rgba(255, 255, 255, 0.06);
+  --cb-glass-1-blur:   12px;
+
+  --cb-glass-2-bg:     rgba(255, 255, 255, 0.07);
+  --cb-glass-2-border: rgba(255, 255, 255, 0.10);
+  --cb-glass-2-blur:   24px;
+
+  --cb-glass-3-bg:     rgba(20, 30, 38, 0.55);
+  --cb-glass-3-border: rgba(94, 234, 212, 0.18);
+  --cb-glass-3-blur:   40px;
+
+  /* ── Inner sheen + drop shadows (elevation) ──────────────────────────── */
+  --cb-sheen-top: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  --cb-shadow-soft:   0 4px 16px rgba(0, 0, 0, 0.18);
+  --cb-shadow-medium: 0 8px 28px rgba(0, 0, 0, 0.28), 0 2px 6px rgba(0, 0, 0, 0.12);
+  --cb-shadow-deep:   0 24px 60px rgba(0, 0, 0, 0.45), 0 6px 16px rgba(0, 0, 0, 0.24);
+
+  /* Focus glow for any interactive element */
+  --cb-focus-ring: 0 0 0 3px rgba(94, 234, 212, 0.35);
+
+  /* ── Radii ───────────────────────────────────────────────────────────── */
+  --cb-radius-xs:   6px;
+  --cb-radius-sm:   10px;
+  --cb-radius-md:   14px;
+  --cb-radius-lg:   20px;  /* default panel radius */
+  --cb-radius-xl:   28px;
+  --cb-radius-pill: 9999px;
+
+  /* ── Motion ──────────────────────────────────────────────────────────── */
+  --cb-ease: cubic-bezier(0.32, 0.72, 0, 1);
+  --cb-dur-fast: 120ms;
+  --cb-dur-base: 180ms;
+  --cb-dur-slow: 260ms;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+ * Tailwind v4 @theme block — exposes tokens as utilities.
+ * Examples produced:  bg-cb-brand  text-cb-secondary  rounded-cb-lg  shadow-cb-soft
+ * ───────────────────────────────────────────────────────────────────────── */
+@theme {
+  --color-cb-brand:        #14b8a6;
+  --color-cb-secondary:    #5eead4;
+  --color-cb-deep:         #0d4f5c;
+  --color-cb-violet:       #8b6dff;
+  --color-cb-amber:        #f59e0b;
+  --color-cb-rose:         #fb7185;
+  --color-cb-aurora-base:  #06222b;
+
+  --radius-cb-xs:   6px;
+  --radius-cb-sm:   10px;
+  --radius-cb-md:   14px;
+  --radius-cb-lg:   20px;
+  --radius-cb-xl:   28px;
+  --radius-cb-pill: 9999px;
+
+  --shadow-cb-soft:   0 4px 16px rgba(0, 0, 0, 0.18);
+  --shadow-cb-medium: 0 8px 28px rgba(0, 0, 0, 0.28), 0 2px 6px rgba(0, 0, 0, 0.12);
+  --shadow-cb-deep:   0 24px 60px rgba(0, 0, 0, 0.45), 0 6px 16px rgba(0, 0, 0, 0.24);
+
+  --ease-cb: cubic-bezier(0.32, 0.72, 0, 1);
+
+  --animate-cb-aurora: cb-aurora 90s linear infinite;
+  --animate-cb-fade-in: cb-fade-in 180ms cubic-bezier(0.32, 0.72, 0, 1);
+  --animate-cb-pop-in:  cb-pop-in 180ms cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+ * Glass tier utility classes — apply with className="glass-1" etc.
+ * Use the matching radius / padding via the JSX (Tailwind utilities still apply).
+ * ───────────────────────────────────────────────────────────────────────── */
+
+.cb-glass-1 {
+  background: var(--cb-glass-1-bg);
+  border: 1px solid var(--cb-glass-1-border);
+  -webkit-backdrop-filter: blur(var(--cb-glass-1-blur));
+  backdrop-filter: blur(var(--cb-glass-1-blur));
+  box-shadow: var(--cb-sheen-top), var(--cb-shadow-soft);
+}
+
+.cb-glass-2 {
+  background: var(--cb-glass-2-bg);
+  border: 1px solid var(--cb-glass-2-border);
+  -webkit-backdrop-filter: blur(var(--cb-glass-2-blur)) saturate(140%);
+  backdrop-filter: blur(var(--cb-glass-2-blur)) saturate(140%);
+  box-shadow: var(--cb-sheen-top), var(--cb-shadow-medium);
+}
+
+.cb-glass-3 {
+  background: var(--cb-glass-3-bg);
+  border: 1px solid var(--cb-glass-3-border);
+  -webkit-backdrop-filter: blur(var(--cb-glass-3-blur)) saturate(160%);
+  backdrop-filter: blur(var(--cb-glass-3-blur)) saturate(160%);
+  box-shadow: var(--cb-sheen-top), var(--cb-shadow-deep);
+}
+
+/* Hover lift for glass-2 cards (used by interactive cards) */
+.cb-lift {
+  transition: transform var(--cb-dur-fast) var(--cb-ease),
+              border-color var(--cb-dur-fast) var(--cb-ease),
+              box-shadow var(--cb-dur-fast) var(--cb-ease);
+}
+.cb-lift:hover {
+  transform: translateY(-1px);
+  border-color: rgba(255, 255, 255, 0.16);
+}
+
+/* Default focus ring for any interactive element */
+.cb-focus:focus-visible,
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+[role="button"]:focus-visible {
+  outline: none;
+  box-shadow: var(--cb-focus-ring);
+  border-radius: 6px;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+ * Aurora keyframes — slow translate + scale on the gradient mesh.
+ * The actual gradient layers live in <AuroraBackground />; this just animates
+ * a single transform so the visible result feels "alive" without burning CPU.
+ * ───────────────────────────────────────────────────────────────────────── */
+@keyframes cb-aurora {
+  0%   { transform: translate3d(0, 0, 0) scale(1); }
+  25%  { transform: translate3d(-3%, 2%, 0) scale(1.03); }
+  50%  { transform: translate3d(2%, -2%, 0) scale(1.05); }
+  75%  { transform: translate3d(-1%, -3%, 0) scale(1.02); }
+  100% { transform: translate3d(0, 0, 0) scale(1); }
+}
+
+@keyframes cb-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes cb-pop-in {
+  from { opacity: 0; transform: scale(0.96); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+ * Accessibility fallbacks — respect macOS's Reduce Motion + Reduce Transparency.
+ * Every glass tier gets an opaque substitute; aurora freezes.
+ * ───────────────────────────────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .cb-aurora-layer {
+    animation: none !important;
+  }
+  .cb-lift,
+  .cb-lift:hover {
+    transition: none !important;
+    transform: none !important;
+  }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .cb-glass-1,
+  .cb-glass-2,
+  .cb-glass-3 {
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+  }
+  .cb-glass-1 { background: rgba(15, 25, 32, 0.95); }
+  .cb-glass-2 { background: rgba(20, 30, 38, 0.96); }
+  .cb-glass-3 { background: rgba(10, 20, 26, 0.98); }
+}
