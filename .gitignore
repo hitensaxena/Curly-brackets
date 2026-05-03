@@ -1,0 +1,29 @@
+node_modules
+dist
+out
+release
+.DS_Store
+.eslintcache
+*.log*
+
+# Generated icon outputs (rebuild via build/build-icons.mjs)
+build/icon.iconset/
+
+# Local env / secrets
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+keytar.json
+
+# IDE
+.idea/
+.vscode/
+
+# Electron / OS junk
+.cache/
+
+# Agent harness local state
+.claude/
+.omg/

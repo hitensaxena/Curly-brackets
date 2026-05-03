@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Curly Brackets — an abstract AI alien.
+  Body = two curly brackets ({ }) embracing two glowing eyes.
+  Fur = mathematically-spaced tufts in two interleaved concentric rings.
+  Palette = teal gradient throughout.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="40%" r="70%">
+      <stop offset="0%"   stop-color="#0a3540"/>
+      <stop offset="60%"  stop-color="#06222b"/>
+      <stop offset="100%" stop-color="#02141a"/>
+    </radialGradient>
+
+    <linearGradient id="bracketGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"   stop-color="#5eead4"/>
+      <stop offset="55%"  stop-color="#14b8a6"/>
+      <stop offset="100%" stop-color="#0d7a78"/>
+    </linearGradient>
+
+    <linearGradient id="furOuter" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"   stop-color="#2dd4bf"/>
+      <stop offset="100%" stop-color="#0e6f7c"/>
+    </linearGradient>
+
+    <linearGradient id="furInner" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"   stop-color="#7eead4"/>
+      <stop offset="100%" stop-color="#22c5b6"/>
+    </linearGradient>
+
+    <radialGradient id="bodyHalo" cx="50%" cy="50%" r="50%">
+      <stop offset="0%"   stop-color="#14b8a6" stop-opacity="0.55"/>
+      <stop offset="60%"  stop-color="#0e7e7c" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#0e7e7c" stop-opacity="0"/>
+    </radialGradient>
+
+    <radialGradient id="eyeBase" cx="50%" cy="40%" r="60%">
+      <stop offset="0%"   stop-color="#ecfffa"/>
+      <stop offset="55%"  stop-color="#5eead4"/>
+      <stop offset="100%" stop-color="#0d7a78"/>
+    </radialGradient>
+
+    <radialGradient id="eyeAura" cx="50%" cy="50%" r="50%">
+      <stop offset="0%"   stop-color="#ccfbf1" stop-opacity="0.95"/>
+      <stop offset="40%"  stop-color="#5eead4" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#14b8a6" stop-opacity="0"/>
+    </radialGradient>
+
+    <filter id="auraBlur" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="22"/>
+    </filter>
+
+    <!--
+      A single fur tuft, drawn around its own origin (0,0), pointing UP.
+      Soft teardrop so it reads as fur, not a spike.
+    -->
+    <path id="tuftOuter"
+          d="M -22 0 C -22 -38, -10 -64, 0 -82 C 10 -64, 22 -38, 22 0 Z"
+          fill="url(#furOuter)"/>
+    <path id="tuftInner"
+          d="M -14 0 C -14 -24, -6 -42, 0 -54 C 6 -42, 14 -24, 14 0 Z"
+          fill="url(#furInner)"/>
+  </defs>
+
+  <!-- Rounded-square app tile -->
+  <rect x="0" y="0" width="1024" height="1024" rx="220" ry="220" fill="url(#bg)"/>
+
+  <!-- Soft body halo behind everything -->
+  <ellipse cx="512" cy="510" rx="320" ry="310" fill="url(#bodyHalo)"/>
+
+  <!--
+    Outer fur ring — 24 tufts at 15° spacing, anchored at the alien's center.
+    Each placement: translate to center → rotate → push outward by the radius.
+  -->
+  <g>
+    <use href="#tuftOuter" transform="translate(512 510) rotate(  0) translate(0 -290)"/>
+    <use href="#tuftOuter" transform="translate(512 510) rotate( 15) translate(0 -290)"/>
+    <use href="#tuftOuter" transform="translate(512 510) rotate( 30) translate(0 -290)"/>
+    <use href="#tuftOuter" transform="translate(512 510) rotate( 45) translate(0 -290)"/>
+    <use href="#tuftOuter" transform="translate(512 510) rotate( 60) translate(0 -290)"/>
+    <use href="#tuftOuter" transform="translate(512 510) rotate( 75) translate(0 -290)"/>
+    <use href="#tuftOuter" transform="translate(512 510) rotate( 90) translate(0 -290)"/>
+    <use href="#tuftOuter" transform="translate(512 510) rotate(105) translate(0 -290)"/>
+    <use href="#tuftOuter" transform="translate(512 510) rotate(120) translate(0 -290)"/>
+    <use href="#tuftOuter" transform="translate(512 510) rotate(135) translate(0 -290)"/>
+    <use href="#tuftOuter" transform="translate(512 510) rotate(150) translate(0 -290)"/>
+    <use href="#tuftOuter" transform="translate(512 510) rotate(165) translate(0 -290)"/>
+    <use href="#tuftOuter" transform="translate(512 510) rotate(180) translate(0 -290)"/>
+    <use href="#tuftOuter" transform="translate(512 510) rotate(195) translate(0 -290)"/>
+    <use href="#tuftOuter" transform="translate(512 510) rotate(210) translate(0 -290)"/>
+    <use href="#tuftOuter" transform="translate(512 510) rotate(225) translate(0 -290)"/>
+    <use href="#tuftOuter" transform="translate(512 510) rotate(240) translate(0 -290)"/>
+    <use href="#tuftOuter" transform="translate(512 510) rotate(255) translate(0 -290)"/>
+    <use href="#tuftOuter" transform="translate(512 510) rotate(270) translate(0 -290)"/>
+    <use href="#tuftOuter" transform="translate(512 510) rotate(285) translate(0 -290)"/>
+    <use href="#tuftOuter" transform="translate(512 510) rotate(300) translate(0 -290)"/>
+    <use href="#tuftOuter" transform="translate(512 510) rotate(315) translate(0 -290)"/>
+    <use href="#tuftOuter" transform="translate(512 510) rotate(330) translate(0 -290)"/>
+    <use href="#tuftOuter" transform="translate(512 510) rotate(345) translate(0 -290)"/>
+  </g>
+
+  <!--
+    Inner fur ring — 24 smaller tufts at 7.5° offset, interleaved with the outer.
+  -->
+  <g opacity="0.95">
+    <use href="#tuftInner" transform="translate(512 510) rotate(  7.5) translate(0 -260)"/>
+    <use href="#tuftInner" transform="translate(512 510) rotate( 22.5) translate(0 -260)"/>
+    <use href="#tuftInner" transform="translate(512 510) rotate( 37.5) translate(0 -260)"/>
+    <use href="#tuftInner" transform="translate(512 510) rotate( 52.5) translate(0 -260)"/>
+    <use href="#tuftInner" transform="translate(512 510) rotate( 67.5) translate(0 -260)"/>
+    <use href="#tuftInner" transform="translate(512 510) rotate( 82.5) translate(0 -260)"/>
+    <use href="#tuftInner" transform="translate(512 510) rotate( 97.5) translate(0 -260)"/>
+    <use href="#tuftInner" transform="translate(512 510) rotate(112.5) translate(0 -260)"/>
+    <use href="#tuftInner" transform="translate(512 510) rotate(127.5) translate(0 -260)"/>
+    <use href="#tuftInner" transform="translate(512 510) rotate(142.5) translate(0 -260)"/>
+    <use href="#tuftInner" transform="translate(512 510) rotate(157.5) translate(0 -260)"/>
+    <use href="#tuftInner" transform="translate(512 510) rotate(172.5) translate(0 -260)"/>
+    <use href="#tuftInner" transform="translate(512 510) rotate(187.5) translate(0 -260)"/>
+    <use href="#tuftInner" transform="translate(512 510) rotate(202.5) translate(0 -260)"/>
+    <use href="#tuftInner" transform="translate(512 510) rotate(217.5) translate(0 -260)"/>
+    <use href="#tuftInner" transform="translate(512 510) rotate(232.5) translate(0 -260)"/>
+    <use href="#tuftInner" transform="translate(512 510) rotate(247.5) translate(0 -260)"/>
+    <use href="#tuftInner" transform="translate(512 510) rotate(262.5) translate(0 -260)"/>
+    <use href="#tuftInner" transform="translate(512 510) rotate(277.5) translate(0 -260)"/>
+    <use href="#tuftInner" transform="translate(512 510) rotate(292.5) translate(0 -260)"/>
+    <use href="#tuftInner" transform="translate(512 510) rotate(307.5) translate(0 -260)"/>
+    <use href="#tuftInner" transform="translate(512 510) rotate(322.5) translate(0 -260)"/>
+    <use href="#tuftInner" transform="translate(512 510) rotate(337.5) translate(0 -260)"/>
+    <use href="#tuftInner" transform="translate(512 510) rotate(352.5) translate(0 -260)"/>
+  </g>
+
+  <!--
+    Solid fur body fill — a clean circle covering the brackets so the fur ring
+    reads as the alien's coat, not as floating tufts.
+  -->
+  <circle cx="512" cy="510" r="240" fill="url(#furInner)" opacity="0.85"/>
+
+  <!-- Antennae with glowing tips -->
+  <g>
+    <path d="M 408 250 C 380 170, 360 130, 332 86"
+          stroke="url(#bracketGrad)" stroke-width="22" fill="none" stroke-linecap="round"/>
+    <circle cx="332" cy="86" r="40" fill="url(#eyeAura)" filter="url(#auraBlur)"/>
+    <circle cx="332" cy="86" r="16" fill="url(#eyeBase)"/>
+
+    <path d="M 616 250 C 644 170, 664 130, 692 86"
+          stroke="url(#bracketGrad)" stroke-width="22" fill="none" stroke-linecap="round"/>
+    <circle cx="692" cy="86" r="40" fill="url(#eyeAura)" filter="url(#auraBlur)"/>
+    <circle cx="692" cy="86" r="16" fill="url(#eyeBase)"/>
+  </g>
+
+  <!-- Eyes -->
+  <g>
+    <circle cx="450" cy="510" r="78" fill="url(#eyeAura)" filter="url(#auraBlur)"/>
+    <circle cx="574" cy="510" r="78" fill="url(#eyeAura)" filter="url(#auraBlur)"/>
+    <circle cx="450" cy="510" r="44" fill="url(#eyeBase)"/>
+    <circle cx="574" cy="510" r="44" fill="url(#eyeBase)"/>
+    <circle cx="438" cy="494" r="11" fill="#ffffff" opacity="0.95"/>
+    <circle cx="562" cy="494" r="11" fill="#ffffff" opacity="0.95"/>
+  </g>
+
+  <!-- Mouth: a single soft teal arc instead of dots -->
+  <path d="M 478 638 Q 512 666 546 638"
+        stroke="#ccfbf1" stroke-width="6" fill="none" stroke-linecap="round" opacity="0.85"/>
+</svg>

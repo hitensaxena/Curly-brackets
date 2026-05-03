@@ -1,0 +1,95 @@
+appId: ai.mintrix.curly-brackets
+productName: Curly Brackets
+copyright: Copyright © 2026 Hiten Saxena
+directories:
+  buildResources: build
+  output: release
+files:
+  - '!**/.vscode/*'
+  - '!src/*'
+  - '!electron.vite.config.{js,ts,mjs,cjs}'
+  - '!{.eslintcache,eslint.config.mjs,.prettierignore,.prettierrc.yaml,dev-app-update.yml,CHANGELOG.md,README.md}'
+  - '!{.env,.env.*,.npmrc,pnpm-lock.yaml}'
+  - '!{tsconfig.json,tsconfig.node.json,tsconfig.web.json}'
+  - '!build/icon.iconset/**'
+  - '!build/build-icons.mjs'
+  - '!build/icon.svg'
+  - '!release/**'
+asarUnpack:
+  - resources/**
+  # Native modules — must stay outside the asar so dlopen can read them
+  - node_modules/better-sqlite3/**
+  - node_modules/node-pty/**
+  # sqlite-vec ships its dylib in a SEPARATE platform package
+  # (sqlite-vec-darwin-arm64 / -x64 / -linux-* / -windows-x64).
+  # The wildcard catches both the loader package and every platform binary.
+  - node_modules/sqlite-vec*/**
+  # pdf-parse ships its own data files at runtime
+  - node_modules/pdf-parse/**
+  # keytar is native (macOS Keychain bindings)
+  - node_modules/keytar/**
+
+win:
+  executableName: curly-brackets
+  icon: build/icon.ico
+
+nsis:
+  artifactName: ${name}-${version}-setup.${ext}
+  shortcutName: ${productName}
+  uninstallDisplayName: ${productName}
+  createDesktopShortcut: always
+
+mac:
+  category: public.app-category.developer-tools
+  icon: build/icon.icns
+  hardenedRuntime: true
+  gatekeeperAssess: false
+  entitlements: build/entitlements.mac.plist
+  entitlementsInherit: build/entitlements.mac.plist
+  notarize: false
+  extendInfo:
+    NSCameraUsageDescription: Curly Brackets does not use the camera; this is reserved for future agent integrations.
+    NSMicrophoneUsageDescription: Curly Brackets does not use the microphone; this is reserved for future voice features.
+    NSDocumentsFolderUsageDescription: Curly Brackets reads project files you bind to agents (with your permission).
+    NSDownloadsFolderUsageDescription: Curly Brackets may save exported conversations and reports to Downloads.
+  # Default to arm64 only — building x64 requires rebuilding every native
+  # module against x86_64, which doesn't happen automatically when you build
+  # from an Apple Silicon machine. Add `x64` back here once you've wired up
+  # @electron/rebuild --arch=x64 (or moved to a CI matrix that builds each arch
+  # on a matching host).
+  target:
+    - target: dmg
+      arch:
+        - arm64
+
+dmg:
+  artifactName: ${productName}-${version}-${arch}.${ext}
+  background: null
+  iconSize: 96
+  contents:
+    - x: 130
+      y: 220
+    - x: 410
+      y: 220
+      type: link
+      path: /Applications
+
+linux:
+  icon: build/icon.png
+  target:
+    - AppImage
+    - deb
+  maintainer: Hiten Saxena <hiten@mintrix.ai>
+  category: Development
+
+appImage:
+  artifactName: ${name}-${version}.${ext}
+
+# Rebuild native modules (better-sqlite3, node-pty, sqlite-vec) against
+# the bundled Electron version + target arch before packaging.
+npmRebuild: true
+
+publish:
+  provider: github
+  owner: hitensaxena
+  repo: curly-brackets
